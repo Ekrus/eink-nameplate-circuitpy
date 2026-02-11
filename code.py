@@ -10,7 +10,9 @@ import time
 import board
 import busio
 import displayio
+from adafruit_bitmap_font import bitmap_font
 from fourwire import FourWire
+from adafruit_display_text import label
 
 import adafruit_uc8179
 
@@ -48,6 +50,21 @@ pic = displayio.OnDiskBitmap("/display-ruler-1280x720.bmp")
 t = displayio.TileGrid(pic, pixel_shader=pic.pixel_shader)
 g.append(t)
 
+# Set text, font, and color
+text = "HELLO WORLD!!!\nThis is a test of this stuff lol!\n67 420"
+font = bitmap_font.load_font("/10100.bdf")
+color = 0x000000
+
+# Create the tet label
+text_area = label.Label(font, text=text, color=color)
+
+# Set the location
+text_area.x = 400
+text_area.y = 20
+
+g.append(text_area)
+
+# Show it
 display.root_group = g
 
 display.refresh()
